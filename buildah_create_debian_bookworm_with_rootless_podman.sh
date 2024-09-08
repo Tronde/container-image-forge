@@ -19,6 +19,9 @@ then
   exit 1
 fi
 
+# Name to target container image
+tctri=debian_bookworm_podman
+
 # Get a base image
 ctr=$(buildah from docker://docker.io/library/debian:bookworm)
 
@@ -43,4 +46,10 @@ buildah run -- $ctr sh -c "mkdir -p /var/lib/shared/overlay-images /var/lib/shar
 buildah config --env _CONTAINERS_USERNS_CONFIGURED="" $ctr
 buildah run -- $ctr apt -y reinstall uidmap
  
-buildah commit $ctr debian_bookworm_podman
+# Commit to an image
+buildah commit --rm $ctr $tctri
+# Alternative: Use this and add GPG fingerprint for image signing
+# buildah commit --sign-by <fingerprint> --rm $ctr $tctri
+
+# Tag the image just created
+buildah tag $tctri $tctri:$(date --iso)
