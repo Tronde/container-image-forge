@@ -23,7 +23,7 @@ fi
 tctri=debian_bookworm_podman
 
 # Get a base image
-ctr=$(buildah from docker://docker.io/library/debian:bookworm)
+ctr=$(buildah from --pull=newer docker://docker.io/library/debian:bookworm)
 
 buildah run -- $ctr apt -y update
 buildah run -- $ctr apt -y upgrade
