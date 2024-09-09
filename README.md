@@ -19,13 +19,13 @@ The script `buildah_create_debian_bookworm_with_rootless_podman.sh`:
 
   * Uses `docker.io/library/debian:bookworm` as a base image
   * Creates an image including a rootless podman installation
-    * With name `debian_bookworm_podman`
-    * With tags `latest`and `$(date --iso)` (e.g. `debian_bookworm_podman:2024-09-08`)
+    * With name `debian_rootless_podman`
+    * With tag `bookworm-$(date --iso)` (e.g. `debian_rootless_podman:bookworm-2024-09-08`)
 
 The resulting image can be run in a rootless podman command with the following command:
 
 ```
-]$ podman run --rm --user podman --security-opt label=disable --device /dev/fuse --cap-add=setuid,setgid,sys_admin,chown localhost/debian_bookworm_podman:latest podman info
+]$ podman run --rm --user podman --security-opt label=disable --device /dev/fuse --cap-add=setuid,setgid,sys_admin,chown localhost/debian_rootless_podman:bookworm-2024-09-08 podman info
 host:
 …
 security:
@@ -39,3 +39,7 @@ security:
 ```
 
 The script `buildah_create_debian_bullseye_with_rootless_podman.sh` does the same for Debian 11 (Bullseye).
+
+## Where to find the images?
+
+Repository URL: [quay.io/repository/rhn-support-jkastnin/debian_rootless_podman](https://quay.io/repository/rhn-support-jkastnin/debian_rootless_podman)

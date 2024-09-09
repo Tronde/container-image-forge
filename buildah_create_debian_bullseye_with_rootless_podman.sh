@@ -20,7 +20,7 @@ then
 fi
 
 # Name to target container image
-tctri=debian_bullseye_podman
+tctri=debian_rootless_podman
 
 # Get a base image
 ctr=$(buildah from --pull=newer docker://docker.io/library/debian:bullseye)
@@ -52,4 +52,4 @@ buildah commit --rm $ctr $tctri
 # buildah commit --sign-by <fingerprint> --rm $ctr $tctri
 
 # Tag the image just created
-buildah tag $tctri $tctri:$(date --iso)
+buildah tag $tctri $tctri:bullseye-$(date --iso)
