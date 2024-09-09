@@ -1,8 +1,8 @@
 #!/usr/bin/bash
-# Name: buildah_create_debian_bookworm_with_rootless_podman.sh
+# Name: buildah_create_debian_bullseye_with_rootless_podman.sh
 # Description:
 # Build an OCI compliant container image serving rootless podman on
-# Debian 12 (Bookworm)
+# Debian 11 (Bullseye)
 #
 # CAUTION: This is highly experimental and might breack your system!
 #          Use at your own risk!
@@ -20,10 +20,10 @@ then
 fi
 
 # Name to target container image
-tctri=debian_bookworm_podman
+tctri=debian_bullseye_podman
 
 # Get a base image
-ctr=$(buildah from docker://docker.io/library/debian:bookworm)
+ctr=$(buildah from --pull=newer docker://docker.io/library/debian:bullseye)
 
 buildah run -- $ctr apt -y update
 buildah run -- $ctr apt -y upgrade

@@ -37,3 +37,5 @@ security:
     selinuxEnabled: false
 …
 ```
+
+The script `buildah_create_debian_bullseye_with_rootless_podman.sh` does the same for Debian 11 (Bullseye).
